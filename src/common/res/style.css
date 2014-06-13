@@ -1,0 +1,30 @@
+#startupdigest-popover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  height: 100%;
+  border: '2px double black';
+  background-color: #FFFFFF;
+}
+
+#startupdigest-frame {
+  height: 100%;
+  width: 100%;
+}
+
+#startupdigest-close {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
+}
+
+#startupdigest-close:before {
+  content: "\00d7";
+}

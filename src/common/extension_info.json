@@ -1,0 +1,18 @@
+{
+    "description": "Import events on any webpage directly into Startup Digest.",
+    "creator": "UP Global",
+    "content_scripts": [
+      "content.js"
+    ],
+    "background_scripts": [
+       "main.js"
+    ],
+    "homepage_url": "http://www.startupdigest.com",
+    "version": "0.0.1",
+    "browser_button": {
+        "caption": "Startup Digest - Import Event",
+        "icon": "icons/button.png",
+        "tooltipText": "Startup Digest - Import Event"
+    },
+    "name": "Startup Digest Event Importer"
+}

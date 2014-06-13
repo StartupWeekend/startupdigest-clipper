@@ -1,0 +1,3 @@
+KangoAPI.onReady(function() {
+
+});

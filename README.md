@@ -9,6 +9,13 @@ community.
 
 1) Clone this repository.
 2) Install Python 2.7 ([download])(http://www.python.org/download/)
+3) Build the extension:
+
+   `./watch_build.sh`
+    
+4) Test the extension on your browser.
+  *
+  ([Chrome])(https://developer.chrome.com/extensions/getstarted#unpacked)
 
 # LICENSE
 
@@ -20,5 +27,4 @@ cross-browser easier.  One of the stipulations of using Kango is that:
 ([source])(http://kangoextensions.com/kango.html)
 
 Since Startup Digest is a non-profit, this project claims that benefit.
-
 

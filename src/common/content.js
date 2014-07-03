@@ -7,7 +7,7 @@
 // ==/UserScript==
 
 var $ = window.$.noConflict(true); // Required for Opera and IE
-var STARTUPDIGEST_URL = '//localhost:3000'
+var STARTUPDIGEST_URL = '//localhost:3000';
 
 var displayPopover = function(){
   //Load styles
@@ -34,7 +34,7 @@ var displayPopover = function(){
   var iFrame = $(document.createElement('iframe'))
     .attr({
       'id': 'startupdigest-frame',
-      'src': STARTUPDIGEST_URL '/admin/digests/1.iframe'
+      'src': STARTUPDIGEST_URL + '/admin/digests/1.iframe'
     })
     .appendTo(popover);
 
@@ -44,6 +44,20 @@ var displayPopover = function(){
     })
     .click(hidePopover)
     .appendTo(popover);
+
+  var expandButton = $(document.createElement('div'))
+    .attr({
+      'id': 'startupdigest-expand'
+    })
+    .click(toggleExpand)
+    .appendTo(popover);
+
+  var expandIcon = $(document.createElement('i'))
+    .attr({
+      'id': 'startupdigest-expand-icon',
+      'class': 'icon-arrow-left'
+    })
+    .appendTo(expandButton);
 };
 
 var hidePopover = function(){
@@ -54,6 +68,24 @@ var hidePopover = function(){
     $('#startupdigest-style').remove();
     this.remove();
   });
+};
+
+var expanded = true;
+var toggleExpand = function(){
+  expanded = !expanded;
+  console.log("Expanded is " + expanded);
+  if (expanded === false) {
+    $('#startupdigest-popover').animate({
+      'width': '50px'
+    }, 500);
+    $('#startupdigest-expand-icon').attr({ 'class': 'icon-arrow-left'});
+  }
+  else {
+    $('#startupdigest-popover').animate({
+      'width': '500px'
+    }, 500);
+    $('#startupdigest-expand-icon').attr({ 'class': 'icon-arrow-right'});
+  }
 };
 
 kango.addMessageListener('displayPopover', function(event){

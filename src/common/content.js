@@ -34,7 +34,7 @@ var displayPopover = function(){
   var iFrame = $(document.createElement('iframe'))
     .attr({
       'id': 'startupdigest-frame',
-      'src': STARTUPDIGEST_URL + '/admin/digests/1.iframe'
+      'src': 'about:blank'
     })
     .appendTo(popover);
 
@@ -73,7 +73,6 @@ var hidePopover = function(){
 var expanded = true;
 var toggleExpand = function(){
   expanded = !expanded;
-  console.log("Expanded is " + expanded);
   if (expanded === false) {
     $('#startupdigest-popover').animate({
       'width': '50px'
@@ -90,4 +89,20 @@ var toggleExpand = function(){
 
 kango.addMessageListener('displayPopover', function(event){
   displayPopover();
+  url = event.data.url;
+  target = STARTUPDIGEST_URL + '/admin/events/import.iframe';
+
+  // Sends the request
+  $.ajax({
+    'method': 'POST',
+    'url': target,
+    'data': { 'url': url }
+  })
+  .fail(function(jqXHR, status, err){
+    kango.console.log(jqXHR.responseText);
+    $('#startupdigest-frame').contents().find('html').html(jqXHR.responseText);
+  })
+  .done(function(data, status, jqxhr){
+    $('#startupdigest-frame').contents().find('html').html(data);
+  });
 });

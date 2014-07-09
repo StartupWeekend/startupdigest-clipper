@@ -9,7 +9,7 @@ MyExtension.prototype = {
 
     _onCommand: function() {
         kango.browser.tabs.getCurrent(function(tab){
-            tab.dispatchMessage('displayPopover', {});
+            tab.dispatchMessage('displayPopover', { 'url': tab.getUrl() });
         });
     }
 };

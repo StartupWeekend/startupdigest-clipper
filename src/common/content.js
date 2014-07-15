@@ -9,7 +9,7 @@
 var $ = window.$.noConflict(true); // Required for Opera and IE
 var STARTUPDIGEST_URL = '//localhost:3000';
 
-var displayPopover = function(){
+var displayPopover = function(url){
   //Load styles
   kango.invokeAsync('kango.io.getExtensionFileContents', 'res/style.css', function(cssCode){
     $('head').append("<style id='startupdigest-style'>" + cssCode + "</style");
@@ -34,7 +34,7 @@ var displayPopover = function(){
   var iFrame = $(document.createElement('iframe'))
     .attr({
       'id': 'startupdigest-frame',
-      'src': 'about:blank'
+      'src': STARTUPDIGEST_URL + "/admin/events/import.iframe?url=" + url
     })
     .appendTo(popover);
 
@@ -88,21 +88,6 @@ var toggleExpand = function(){
 };
 
 kango.addMessageListener('displayPopover', function(event){
-  displayPopover();
   url = event.data.url;
-  target = STARTUPDIGEST_URL + '/admin/events/import.iframe';
-
-  // Sends the request
-  $.ajax({
-    'method': 'POST',
-    'url': target,
-    'data': { 'url': url }
-  })
-  .fail(function(jqXHR, status, err){
-    kango.console.log(jqXHR.responseText);
-    $('#startupdigest-frame').contents().find('html').html(jqXHR.responseText);
-  })
-  .done(function(data, status, jqxhr){
-    $('#startupdigest-frame').contents().find('html').html(data);
-  });
+  displayPopover(url);
 });

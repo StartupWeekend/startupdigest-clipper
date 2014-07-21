@@ -26,7 +26,7 @@ var displayPopover = function(url){
         "opacity": "0.0"
       })
       .animate({
-        "width": "500px",
+        "width": "550px",
         "opacity": "1.0"
       }, 500)
       .appendTo(document.body);
@@ -81,7 +81,7 @@ var toggleExpand = function(){
   }
   else {
     $('#startupdigest-popover').animate({
-      'width': '500px'
+      'width': '550px'
     }, 500);
     $('#startupdigest-expand-icon').attr({ 'class': 'icon-arrow-right'});
   }

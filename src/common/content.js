@@ -8,6 +8,7 @@
 
 var $ = window.$.noConflict(true); // Required for Opera and IE
 var STARTUPDIGEST_URL = '//localhost:3000';
+var isOpen = false;
 
 var displayPopover = function(url){
   //Load styles
@@ -58,6 +59,8 @@ var displayPopover = function(url){
       'class': 'icon-arrow-left'
     })
     .appendTo(expandButton);
+
+  isOpen = true;
 };
 
 var hidePopover = function(){
@@ -68,6 +71,7 @@ var hidePopover = function(){
     $('#startupdigest-style').remove();
     this.remove();
   });
+  isOpen = false;
 };
 
 var expanded = true;
@@ -88,6 +92,8 @@ var toggleExpand = function(){
 };
 
 kango.addMessageListener('displayPopover', function(event){
-  url = event.data.url;
-  displayPopover(url);
+  if (isOpen === false) {
+    url = event.data.url;
+    displayPopover(url);
+  };
 });

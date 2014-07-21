@@ -14,5 +14,8 @@
         "icon": "icons/button.png",
         "tooltipText": "Startup Digest - Import Event"
     },
-    "name": "Startup Digest Event Importer"
+    "name": "Startup Digest Event Importer",
+    "web_accessible_resources": [
+      "icons/*"
+    ]
 }

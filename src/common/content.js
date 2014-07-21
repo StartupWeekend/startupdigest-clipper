@@ -39,24 +39,25 @@ var displayPopover = function(url){
     })
     .appendTo(popover);
 
-  var closeButton = $(document.createElement('div'))
+  var closeButton = $(document.createElement('img'))
     .attr({
-      'id': 'startupdigest-close'
+      'id': 'startupdigest-close',
+      'src': kango.io.getResourceUrl('icons/close.png')
     })
     .click(hidePopover)
     .appendTo(popover);
 
   var expandButton = $(document.createElement('div'))
     .attr({
-      'id': 'startupdigest-expand'
+      'id': 'startupdigest-expand',
     })
     .click(toggleExpand)
     .appendTo(popover);
 
-  var expandIcon = $(document.createElement('i'))
+  var expandIcon = $(document.createElement('img'))
     .attr({
       'id': 'startupdigest-expand-icon',
-      'class': 'icon-arrow-left'
+      'src': kango.io.getResourceUrl('icons/collapsearrow.png')
     })
     .appendTo(expandButton);
 
@@ -81,13 +82,11 @@ var toggleExpand = function(){
     $('#startupdigest-popover').animate({
       'width': '50px'
     }, 500);
-    $('#startupdigest-expand-icon').attr({ 'class': 'icon-arrow-left'});
   }
   else {
     $('#startupdigest-popover').animate({
       'width': '550px'
     }, 500);
-    $('#startupdigest-expand-icon').attr({ 'class': 'icon-arrow-right'});
   }
 };
 

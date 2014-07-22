@@ -10,11 +10,11 @@
     "homepage_url": "http://www.startupdigest.com",
     "version": "0.0.1",
     "browser_button": {
-        "caption": "Startup Digest - Import Event",
+        "caption": "Startup Digest Clipper",
         "icon": "icons/button.png",
-        "tooltipText": "Startup Digest - Import Event"
+        "tooltipText": "Startup Digest Clipper"
     },
-    "name": "Startup Digest Event Importer",
+    "name": "Startup Digest Clipper",
     "web_accessible_resources": [
       "icons/*"
     ]

@@ -1,0 +1,25 @@
+{
+    "kango_version": "1.3.9 5f7ad87d19fe", 
+    "web_accessible_resources": [
+        "icons/*"
+    ], 
+    "kango_package_id": "dev", 
+    "description": "Import events on any webpage directly into Startup Digest.", 
+    "content_scripts": [
+        "content.js"
+    ], 
+    "creator": "UP Global", 
+    "package_id": "kango-7aa42f16-df91-43e9-9c19-a01d89921ece", 
+    "background_scripts": [
+        "main.js"
+    ], 
+    "homepage_url": "http://www.startupdigest.com", 
+    "version": "0.0.2", 
+    "browser_button": {
+        "caption": "Startup Digest Clipper", 
+        "tooltipText": "Startup Digest Clipper", 
+        "icon": "icons/button.png"
+    }, 
+    "id": "{7AA42F16-DF91-43E9-9C19-A01D89921ECE}", 
+    "name": "Startup Digest Clipper"
+}

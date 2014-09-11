@@ -1,0 +1,51 @@
+#startupdigest-popover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  height: 100%;
+  border: '1px solid gray';
+  background-color: #FFFFFF;
+}
+
+#startupdigest-frame {
+  height: 100%;
+  width: 100%;
+}
+
+#startupdigest-close {
+  position: absolute;
+  top: 5px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  color: #FFFFFF;
+  text-align: center;
+  cursor: pointer;
+}
+
+#startupdigest-expand {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: -25px;
+  width: 25px;
+  height: 60px;
+  background-color: #F2F2F2;
+  z-index: 10001;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid black;
+}
+
+#startupdigest-expand-icon {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  width: 17px;
+  height: 10px;
+  margin-top: -5px;
+  margin-right: -8px;
+}
+

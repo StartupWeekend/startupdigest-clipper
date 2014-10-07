@@ -14,11 +14,11 @@
         "main.js"
     ], 
     "homepage_url": "http://www.startupdigest.com", 
-    "version": "0.0.3", 
+    "version": "0.0.4", 
     "browser_button": {
         "caption": "Startup Digest Clipper", 
         "tooltipText": "Startup Digest Clipper", 
-        "icon": "icons/button.png"
+        "icon": "icons/icon32.png"
     }, 
     "id": "com.kangoextensions.mykango", 
     "name": "Startup Digest Clipper"

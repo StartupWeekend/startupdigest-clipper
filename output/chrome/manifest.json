@@ -26,11 +26,11 @@
         "page": "background.html"
     }, 
     "homepage_url": "http://www.startupdigest.com", 
-    "version": "0.0.3", 
+    "version": "0.0.4", 
     "manifest_version": 2, 
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'", 
     "browser_action": {
-        "default_icon": "icons/button.png", 
+        "default_icon": "icons/icon32.png", 
         "default_title": "Startup Digest Clipper"
     }, 
     "permissions": [

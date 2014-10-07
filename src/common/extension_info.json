@@ -8,7 +8,7 @@
        "main.js"
     ],
     "homepage_url": "http://www.startupdigest.com",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "browser_button": {
         "caption": "Startup Digest Clipper",
         "icon": "icons/button.png",

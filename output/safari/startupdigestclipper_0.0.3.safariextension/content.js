@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name ChristmasTree
+// @name StartupDigestClipper
 // @include http://*
 // @include https://*
 // @include about:blank
@@ -7,8 +7,9 @@
 // ==/UserScript==
 
 var $ = window.$.noConflict(true); // Required for Opera and IE
-//var STARTUPDIGEST_URL = '//localhost:3000';
-var STARTUPDIGEST_URL = '//www.startupdigest.com';
+var STARTUPDIGEST_URL = '//57d68f83.ngrok.com'
+// var STARTUPDIGEST_URL = '//localhost:3000';
+// var STARTUPDIGEST_URL = '//www.startupdigest.com';
 var isOpen = false;
 
 var displayPopover = function(url){
@@ -33,32 +34,51 @@ var displayPopover = function(url){
       }, 500)
       .appendTo(document.body);
 
+  var header = $(document.createElement('div'))
+    .attr({
+      id: 'startupdigest-popover-header'
+    }).appendTo(popover)
+
   var iFrame = $(document.createElement('iframe'))
     .attr({
+      'frameborder': "none",
       'id': 'startupdigest-frame',
       'src': STARTUPDIGEST_URL + "/admin/events/import.iframe?url=" + url
     })
     .appendTo(popover);
 
-  var closeButton = $(document.createElement('img'))
+  var closeButton = $(document.createElement('span'))
     .attr({
       'id': 'startupdigest-close',
-      'src': kango.io.getResourceUrl('icons/close.png')
     })
+    .text("Cancel")
     .click(hidePopover)
-    .appendTo(popover);
+    .appendTo(header);
 
   var expandButton = $(document.createElement('div'))
     .attr({
       'id': 'startupdigest-expand',
     })
     .click(toggleExpand)
-    .appendTo(popover);
+    .appendTo(header);
 
-  var expandIcon = $(document.createElement('img'))
+  var headerLogo = $(document.createElement('img'))
     .attr({
-      'id': 'startupdigest-expand-icon',
-      'src': kango.io.getResourceUrl('icons/collapsearrow.png')
+      'id': 'startupdigest-header-logo',
+      src: kango.io.getResourceUrl('icons/icon128.png')
+    })
+    .click(toggleExpand)
+    .appendTo(header);
+
+  var headerText = $(document.createElement('span'))
+    .attr({
+      'id': 'startupdigest-header-text'
+    }).text("Startup Digest Event Clipper")
+    .appendTo(header);
+
+  var expandIcon = $(document.createElement('span'))
+    .attr({
+      'id': 'startupdigest-expand-icon'
     })
     .appendTo(expandButton);
 
@@ -80,14 +100,17 @@ var expanded = true;
 var toggleExpand = function(){
   expanded = !expanded;
   if (expanded === false) {
+    $('#startupdigest-expand-icon').addClass('collapsed');
     $('#startupdigest-popover').animate({
-      'width': '50px'
-    }, 500);
+      'height': '40px'
+    }, 250).css({'box-shadow': 'none'});
   }
   else {
-    $('#startupdigest-popover').animate({
-      'width': '550px'
-    }, 500);
+    $('#startupdigest-expand-icon').removeClass('collapsed');
+    $('#startupdigest-popover').css({
+      'height': '',
+      'box-shadow': "0 0 10000px 10000px rgba(0,0,0,0.3)"
+    });
   }
 };
 

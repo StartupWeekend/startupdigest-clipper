@@ -47,6 +47,20 @@ var displayPopover = function(url){
     })
     .appendTo(popover);
 
+  var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+  var eventer = window[eventMethod];
+  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+  // Listen to message from child window
+  eventer(messageEvent,function(e) {
+      var key = e.message ? "message" : "data";
+      var data = e[key];
+      if(data == "close!") {
+        hidePopover();
+      }
+      //run function//
+  },false);
+
   var closeButton = $(document.createElement('span'))
     .attr({
       'id': 'startupdigest-close',

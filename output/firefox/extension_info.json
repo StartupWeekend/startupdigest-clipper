@@ -14,11 +14,11 @@
         "main.js"
     ], 
     "homepage_url": "http://www.startupdigest.com", 
-    "version": "0.0.3", 
+    "version": "0.0.4", 
     "browser_button": {
         "caption": "Startup Digest Clipper", 
         "tooltipText": "Startup Digest Clipper", 
-        "icon": "icons/button.png"
+        "icon": "icons/icon32.png"
     }, 
     "id": "{7AA42F16-DF91-43E9-9C19-A01D89921ECE}", 
     "name": "Startup Digest Clipper"

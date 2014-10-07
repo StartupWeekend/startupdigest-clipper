@@ -7,9 +7,9 @@
 // ==/UserScript==
 
 var $ = window.$.noConflict(true); // Required for Opera and IE
-var STARTUPDIGEST_URL = '//57d68f83.ngrok.com'
+// var STARTUPDIGEST_URL = '//57d68f83.ngrok.com'
 // var STARTUPDIGEST_URL = '//localhost:3000';
-// var STARTUPDIGEST_URL = '//www.startupdigest.com';
+var STARTUPDIGEST_URL = '//www.startupdigest.com';
 var isOpen = false;
 
 var displayPopover = function(url){

@@ -1,3 +1,0 @@
-KangoAPI.onReady(function() {
-
-});

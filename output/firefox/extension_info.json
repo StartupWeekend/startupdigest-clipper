@@ -13,7 +13,7 @@
         "main.js"
     ], 
     "homepage_url": "http://www.startupdigest.com", 
-    "version": "0.0.4", 
+    "version": "0.0.5", 
     "framework_package_id": "dev", 
     "browser_button": {
         "caption": "Startup Digest Clipper", 

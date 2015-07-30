@@ -1,1 +1,1 @@
-(function(){kango.SQLiteStorageAsync.prototype.removeDatabase()})();
+module.exports=function(){var e=require("kango/storage");e.uninstall()};

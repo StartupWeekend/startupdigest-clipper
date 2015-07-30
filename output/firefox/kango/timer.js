@@ -1,3 +1,9 @@
-kango.Timer=function(){this._timers={};this._lastId=0};
-kango.Timer.prototype={_timers:null,_lastId:0,dispose:function(){var a=kango.object.getKeys(this._timers);kango.array.forEach(a,function(a){this._clearTimer(a)},this)},_setTimer:function(a,b,d){var e=Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer),c=++this._lastId;this._timers[c]=e;e.initWithCallback({notify:kango.func.bind(function(){d==Ci.nsITimer.TYPE_ONE_SHOT&&(this._clearTimer(c),a())},this)},b,d);return c},_clearTimer:function(a){if("undefined"!=typeof this._timers[a]){var b=this._timers[a];
-delete this._timers[a];b.cancel()}},setInterval:function(a,b){return this._setTimer(a,b,Ci.nsITimer.TYPE_REPEATING_SLACK)},clearInterval:function(a){return this._clearTimer(a)},setTimeout:function(a,b){return this._setTimer(a,b,Ci.nsITimer.TYPE_ONE_SHOT)},clearTimeout:function(a){this._clearTimer(a)}};kango.registerModule(kango.getDefaultModuleRegistrar("timer",kango.Timer));
+﻿function ITimer(){}function getPublicApi(){return utils.createApiWrapper(module.exports,ITimer.prototype)}var utils=require("kango/utils"),NotImplementedException=utils.NotImplementedException;ITimer.prototype={setInterval:function(e,t){return new NotImplementedException},clearInterval:function(e){return new NotImplementedException},setTimeout:function(e,t){return new NotImplementedException},clearTimeout:function(e){return new NotImplementedException}};
+
+
+
+
+
+
+
+function Timer(){this._timers={},this._lastId=0}var utils=require("kango/utils"),object=utils.object,array=utils.array,func=utils.func;Timer.prototype={dispose:function(){var i=object.getKeys(this._timers);array.forEach(i,function(i){this._clearTimer(i)},this)},_setTimer:function(i,t,e){var r=Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer),s=++this._lastId;return this._timers[s]=r,r.initWithCallback({notify:func.bind(function(){e==Ci.nsITimer.TYPE_ONE_SHOT&&(this._clearTimer(s),i())},this)},t,e),s},_clearTimer:function(i){if("undefined"!=typeof this._timers[i]){var t=this._timers[i];delete this._timers[i],t.cancel()}},setInterval:function(i,t){return this._setTimer(i,t,Ci.nsITimer.TYPE_REPEATING_SLACK)},clearInterval:function(i){return this._clearTimer(i)},setTimeout:function(i,t){return this._setTimer(i,t,Ci.nsITimer.TYPE_ONE_SHOT)},clearTimeout:function(i){this._clearTimer(i)}},module.exports=new Timer,module.exports.getPublicApi=getPublicApi;

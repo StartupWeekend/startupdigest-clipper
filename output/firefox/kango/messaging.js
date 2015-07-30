@@ -1,7 +1,4 @@
-﻿kango.MessageRouterBase=function(){this._messageQueue=[]};
-kango.MessageRouterBase.prototype={_messageQueue:null,_dispatchMessagesFromQueue:function(){0<this._messageQueue.length&&(kango.backgroundScript.isLoaded()?(kango.array.forEach(this._messageQueue,function(a){kango.fireEvent(a.name,a.event)}),this._messageQueue=[]):kango.timer.setTimeout(kango.func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},fireMessageEvent:function(a,b){kango.backgroundScript.isLoaded()?(this._dispatchMessagesFromQueue(),kango.fireEvent(kango.event.MESSAGE,b)):
-(this._messageQueue.push({name:a,event:b}),kango.timer.setTimeout(kango.func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},dispatchMessage:function(a,b){return this.dispatchMessageEx({name:a,data:b,origin:"background",target:kango,source:kango})},dispatchMessageEx:function(a){kango.timer.setTimeout(kango.func.bind(function(){this.fireMessageEvent(kango.event.MESSAGE,a)},this),1);return!0}};
-kango.registerModule(function(a){var b=new kango.MessageRouter;a.dispatchMessage=function(a,c){return b.dispatchMessage(a,c)};a.dispatchMessageEx=function(a){return b.dispatchMessageEx(a)};this.dispose=function(){a.dispatchMessage=null;b=a.dispatchMessageEx=null}});
+﻿function MessageSource(){this.dispatchMessage=function(e,s){}}function MessageRouterBase(){this._messageQueue=[]}var core=require("kango/core"),utils=require("kango/utils"),timer=require("kango/timer"),backgroundScriptEngine=require("kango/backgroundscript_engine"),array=utils.array,func=utils.func;MessageRouterBase.prototype={_dispatchMessagesFromQueue:function(){this._messageQueue.length>0&&(backgroundScriptEngine.isLoaded()?(array.forEach(this._messageQueue,function(e){core.fireEvent(e.name,e.event)}),this._messageQueue=[]):timer.setTimeout(func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},fireMessageEvent:function(e,s){backgroundScriptEngine.isLoaded()?(this._dispatchMessagesFromQueue(),core.fireEvent("message",s)):(this._messageQueue.push({name:e,event:s}),timer.setTimeout(func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},dispatchMessage:function(e,s){var i={name:e,data:s,origin:"background",target:this,source:this};return this.dispatchMessageEx(i)},dispatchMessageEx:function(e){return timer.setTimeout(func.bind(function(){this.fireMessageEvent("message",e)},this),1),!0}};
 
 
 
@@ -9,5 +6,4 @@ kango.registerModule(function(a){var b=new kango.MessageRouter;a.dispatchMessage
 
 
 
-
-kango.MessageRouter=function(){this.superclass.apply(this,arguments)};kango.MessageRouter.prototype=kango.oop.extend(kango.MessageRouterBase,{});
+function MessageRouter(){MessageRouterBase.apply(this,arguments)}var utils=require("kango/utils"),object=utils.object;MessageRouter.prototype=object.extend(MessageRouterBase,{}),module.exports=new MessageRouter;

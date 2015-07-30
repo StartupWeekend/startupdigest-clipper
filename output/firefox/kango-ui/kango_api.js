@@ -1,6 +1,4 @@
-﻿(function(e){var f=function(a){var b=a.oop.createProxy(a),c=[];b.addMessageListener=function(a,b){return this.baseObject.addMessageListener(a,b)?(c.push({name:a,listener:b}),!0):!1};b.removeMessageListener=function(a,b){if(this.baseObject.removeMessageListener(a,b))for(var d=0;d<c.length;d++)if(c[d].name==a&&c[d].listener==b)return c.splice(d,1),!0;return!1};var d=function(){for(var b=0;b<c.length;b++)a.removeMessageListener(c[b].name,c[b].listener);c=[]};"undefined"!=typeof window.addEventListener?
-window.addEventListener("unload",function(){d()},!1):window.attachEvent("onunload",function(){d()});return b};e.KangoAPI={_readyListeners:[],_readyFired:!1,createKangoProxy:function(a){return f(a)},onReady:function(a){this._readyFired?a():this._readyListeners.push(a)},closeWindow:function(){},resizeWindow:function(a,b){},getBackgroundPage:function(){},fireReady:function(){var a=KangoAPI.getBackgroundPage();if(a){var b=a.kango;b.array.forEach(b._externalObjects,function(c){"kango"==c?window.kango=
-KangoAPI.createKangoProxy(b):window[c]=a[c]})}for(var c=0;c<this._readyListeners.length;c++)this._readyListeners[c]();this._readyFired=!0}}})(window);
+﻿!function(n){function e(){var n=[],e=!1;this.onReady=function(i){e?i():n.push(i)},this.closeWindow=function(){},this.resizeWindow=function(n,e){},this.getBackgroundPage=function(){},this._fireReady=function(){var o=KangoAPI.getBackgroundPage();if(o){var t=KangoAPI._require("kango/utils").object;t.forEach(i(KangoAPI._require),function(n,e){window[e]=n})}for(var a=0;a<n.length;a++)n[a]();e=!0,delete this._fireReady,delete this._require,t&&t.freeze(this)}}var i=function(n){var e=n("kango/core").createApiInstance("popup");return"undefined"!=typeof window.addEventListener?window.addEventListener("unload",function(){e.clear()},!1):window.attachEvent("onunload",function(){e.clear()}),e.obj};n.KangoAPI=new e}(window);
 
 
 
@@ -8,5 +6,4 @@ KangoAPI.createKangoProxy(b):window[c]=a[c]})}for(var c=0;c<this._readyListeners
 
 
 
-
-window.addEventListener("DOMContentLoaded",function(){KangoAPI.getBackgroundPage=function(){return window.kango.getBackgroundPage()};KangoAPI.closeWindow=function(){window.__optionsPageMode?kango.ui.optionsPage.close():kango.ui.browserButton.closePopup()};KangoAPI.resizeWindow=function(a,b){window.__optionsPageMode||kango.ui.browserButton.resizePopup(a,b)};KangoAPI.fireReady()},!1);
+window.addEventListener("DOMContentLoaded",function(){var o=window.__kango_require;delete window.__kango_require;var n=window.__kango_optionsPageMode;delete window.__kango_optionsPageMode,KangoAPI.getBackgroundPage=function(){return o("kango/backgroundscript_engine").getDOMWindow()},KangoAPI._require=function(n){return o(n)},KangoAPI.closeWindow=function(){n?o("kango-ui/options").close():o("kango-ui/browser_button").closePopup()},KangoAPI.resizeWindow=function(e,i){n||o("kango-ui/browser_button").resizePopup(e,i)},KangoAPI._fireReady()},!1);

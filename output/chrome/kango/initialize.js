@@ -1,1 +1,1 @@
-window.addEventListener("load",function(){kango.init(function(){var a=new XMLHttpRequest;a.open("GET",chrome.extension.getURL(kango.CONFIG_FILE_NAME),!1);a.overrideMimeType("text/plain");a.send(null);return JSON.parse(a.responseText)}())},!1);
+window.addEventListener("load",function(){function n(n,e){var o=["kango/userscript_engine","kango/backgroundscript_engine","kango/api"];e.modules&&(o=o.concat(e.modules));for(var a=0;a<o.length;a++)n.require(o[a])}n(_kangoLoader,_kangoLoader.require("kango/extension_info")),_kangoLoader.require("kango/core").init()},!1);

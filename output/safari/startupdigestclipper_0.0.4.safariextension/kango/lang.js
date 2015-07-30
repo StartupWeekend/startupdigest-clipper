@@ -1,1 +1,12 @@
-kango.Lang=function(){};kango.Lang.prototype=kango.oop.extend(kango.LangBase,{createHTMLSandbox:function(a,b){return b(window)},evalInSandbox:function(a,b,d){a="";for(var c in b)b.hasOwnProperty(c)&&"window"!=c&&"document"!=c&&(a+="var "+c+'=api["'+c+'"];');try{(new Function("api",a+d))(b)}catch(e){kango.console.reportError(e,"")}}});kango.registerModule(kango.getDefaultModuleRegistrar("lang",kango.Lang));
+﻿"use strict";
+_kangoLoader.add("kango/lang", function(require, exports, module) {
+function LangBase(){}var NotImplementedException=require("kango/utils").NotImplementedException;LangBase.prototype={evalInSandbox:function(e,n){throw new NotImplementedException},evalScriptsInSandbox:function(e,n){for(var t="",o=0;o<n.length;o++){for(var r=0;r<n[o].requires.length;r++)t+=n[o].requires[r].text+"\n\n";t+=n[o].text+"\n\n"}return this.evalInSandbox(e,t)}};
+
+
+
+
+
+
+
+function Lang(){}var object=require("kango/utils").object;Lang.prototype=object.extend(LangBase,{createHTMLSandbox:function(e,n){return n(window)}}),module.exports=new Lang;
+});

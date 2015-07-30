@@ -1,6 +1,6 @@
-﻿kango.IStorage=function(){};kango.IStorage.prototype={setItem:function(a,b){throw new kango.NotImplementedException;},getItem:function(a){throw new kango.NotImplementedException;},removeItem:function(a){throw new kango.NotImplementedException;},getKeys:function(){throw new kango.NotImplementedException;},clear:function(){throw new kango.NotImplementedException;}};kango.JSONStorage=function(a){this._storageEngine=a};
-kango.JSONStorage.prototype=kango.oop.extend(kango.IStorage,{_storageEngine:null,getItem:function(a){a=this._storageEngine.getItem(a);return"undefined"!=typeof a&&null!=a?JSON.parse(a):null},setItem:function(a,b){if("undefined"!=typeof b){var c=JSON.stringify(b);if("undefined"!=typeof c)return this._storageEngine.setItem(a,c)}else return this.removeItem(a);return!1},removeItem:function(a){return this._storageEngine.removeItem(a)},getKeys:function(){return this._storageEngine.getKeys()},clear:function(){return this._storageEngine.clear()},
-dispose:function(){"undefined"!=typeof this._storageEngine.dispose&&this._storageEngine.dispose();this._storageEngine=null}});
+﻿"use strict";
+_kangoLoader.add("kango/storage", function(require, exports, module) {
+function IStorage(){}function JSONStorage(e){EventTarget.call(this),this._storageEngine=e}function getPublicApi(){return utils.createApiWrapper(module.exports.storage,IStorage.prototype)}var utils=require("kango/utils"),array=utils.array,object=utils.object,EventTarget=utils.EventTarget,NotImplementedException=utils.NotImplementedException;IStorage.prototype={setItem:function(e,t){throw new NotImplementedException},getItem:function(e){throw new NotImplementedException},removeItem:function(e){throw new NotImplementedException},getKeys:function(){throw new NotImplementedException},clear:function(){throw new NotImplementedException}},JSONStorage.prototype=object.extend(EventTarget,{_storageEngine:null,getItem:function(e){var t=this._storageEngine.getItem(e);return"undefined"!=typeof t&&null!=t?JSON.parse(t):null},setItem:function(e,t){if("undefined"==typeof t)return this.removeItem(e);var n=JSON.stringify(t);return"undefined"!=typeof n&&(this._storageEngine.setItem(e,n),this.fireEvent("setItem",{data:{name:e,value:t}})),!1},removeItem:function(e){this._storageEngine.removeItem(e),this.fireEvent("removeItem",{data:{name:e}})},getKeys:function(){return this._storageEngine.getKeys()},getItems:function(){var e={};return array.forEach(this.getKeys(),function(t){e[t]=this.getItem(t)},this),e},clear:function(){this._storageEngine.clear(),this.fireEvent("clear")},dispose:function(){this.removeAllEventListeners(),"undefined"!=typeof this._storageEngine.dispose&&this._storageEngine.dispose(),this._storageEngine=null}});
 
 
 
@@ -8,12 +8,7 @@ dispose:function(){"undefined"!=typeof this._storageEngine.dispose&&this._storag
 
 
 
-
-kango.SYSTEM_STORAGE_PREFIX="{772ED927-1623-4E2C-94CC-D5E488E34C5B}_KangoSystemStorage.";kango.UserStorage=function(a){this._storageEngine=a};
-kango.UserStorage.prototype=kango.oop.extend(kango.IStorage,{_storageEngine:null,getItem:function(a){return this._storageEngine.getItem(a)},setItem:function(a,b){return this._storageEngine.setItem(a,b)},removeItem:function(a){return this._storageEngine.removeItem(a)},clear:function(){return this._storageEngine.clear()},getKeys:function(){return kango.array.filter(this._storageEngine.getKeys(),function(a){return 0!=a.indexOf(kango.SYSTEM_STORAGE_PREFIX)})}});
-kango.SystemStorage=function(a){this._storageEngine=a};
-kango.SystemStorage.prototype=kango.oop.extend(kango.IStorage,{_storageEngine:null,getItem:function(a){return this._storageEngine.getItem(kango.SYSTEM_STORAGE_PREFIX+a)},setItem:function(a,b){return this._storageEngine.setItem(kango.SYSTEM_STORAGE_PREFIX+a,b)},removeItem:function(a){return this._storageEngine.removeItem(kango.SYSTEM_STORAGE_PREFIX+a)},clear:function(){return this._storageEngine.clear()},getKeys:function(){return kango.array.filter(this._storageEngine.getKeys(),function(a){return 0==
-a.indexOf(kango.SYSTEM_STORAGE_PREFIX)})}});
+function UserStorage(t){this._storageEngine=t}function SystemStorage(t){this._storageEngine=t}var utils=require("kango/utils"),array=utils.array,SYSTEM_STORAGE_PREFIX="{772ED927-1623-4E2C-94CC-D5E488E34C5B}_SystemStorage.";UserStorage.prototype={getItem:function(t){return this._storageEngine.getItem(t)},setItem:function(t,e){return this._storageEngine.setItem(t,e)},removeItem:function(t){return this._storageEngine.removeItem(t)},clear:function(){array.forEach(this.getKeys(),function(t){this.removeItem(t)},this)},getKeys:function(){return array.filter(this._storageEngine.getKeys(),function(t){return 0!=t.indexOf(SYSTEM_STORAGE_PREFIX)})}},SystemStorage.prototype={getItem:function(t){return this._storageEngine.getItem(SYSTEM_STORAGE_PREFIX+t)},setItem:function(t,e){return this._storageEngine.setItem(SYSTEM_STORAGE_PREFIX+t,e)},removeItem:function(t){return this._storageEngine.removeItem(SYSTEM_STORAGE_PREFIX+t)},clear:function(){array.forEach(this.getKeys(),function(t){this.removeItem(t)},this)},getKeys:function(){return array.filter(this._storageEngine.getKeys(),function(t){return 0==t.indexOf(SYSTEM_STORAGE_PREFIX)})}};
 
 
 
@@ -21,6 +16,5 @@ a.indexOf(kango.SYSTEM_STORAGE_PREFIX)})}});
 
 
 
-
-kango.LocalStorage=function(){};kango.LocalStorage.prototype={getItem:function(a){return localStorage.getItem(a)},setItem:function(a,b){return localStorage.setItem(a,b)},removeItem:function(a){return localStorage.removeItem(a)},clear:function(){return localStorage.clear()},getKeys:function(){for(var a=localStorage.length,b=Array(a),c=0;c<a;c++)b[c]=localStorage.key(c);return b}};kango.registerModule(kango.getDefaultModuleRegistrar("storage",function(){return new kango.JSONStorage(new kango.UserStorage(new kango.LocalStorage))}));
-kango.registerModule(kango.getDefaultModuleRegistrar("systemStorage",function(){return new kango.JSONStorage(new kango.SystemStorage(new kango.LocalStorage))}));
+function LocalStorage(){}LocalStorage.prototype={getItem:function(e){return localStorage.getItem(e)},setItem:function(e,t){return localStorage.setItem(e,t)},removeItem:function(e){return localStorage.removeItem(e)},clear:function(){return localStorage.clear()},getKeys:function(){for(var e=localStorage.length,t=new Array(e),o=0;e>o;o++)t[o]=localStorage.key(o);return t}},module.exports.storage=new JSONStorage(new UserStorage(new LocalStorage)),module.exports.systemStorage=new JSONStorage(new SystemStorage(new LocalStorage)),module.exports.getPublicApi=getPublicApi;
+});

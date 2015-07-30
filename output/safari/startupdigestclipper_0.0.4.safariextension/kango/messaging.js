@@ -1,7 +1,6 @@
-﻿kango.MessageRouterBase=function(){this._messageQueue=[]};
-kango.MessageRouterBase.prototype={_messageQueue:null,_dispatchMessagesFromQueue:function(){0<this._messageQueue.length&&(kango.backgroundScript.isLoaded()?(kango.array.forEach(this._messageQueue,function(a){kango.fireEvent(a.name,a.event)}),this._messageQueue=[]):kango.timer.setTimeout(kango.func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},fireMessageEvent:function(a,b){kango.backgroundScript.isLoaded()?(this._dispatchMessagesFromQueue(),kango.fireEvent(kango.event.MESSAGE,b)):
-(this._messageQueue.push({name:a,event:b}),kango.timer.setTimeout(kango.func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},dispatchMessage:function(a,b){return this.dispatchMessageEx({name:a,data:b,origin:"background",target:kango,source:kango})},dispatchMessageEx:function(a){kango.timer.setTimeout(kango.func.bind(function(){this.fireMessageEvent(kango.event.MESSAGE,a)},this),1);return!0}};
-kango.registerModule(function(a){var b=new kango.MessageRouter;a.dispatchMessage=function(a,c){return b.dispatchMessage(a,c)};a.dispatchMessageEx=function(a){return b.dispatchMessageEx(a)};this.dispose=function(){a.dispatchMessage=null;b=a.dispatchMessageEx=null}});
+﻿"use strict";
+_kangoLoader.add("kango/messaging", function(require, exports, module) {
+function MessageSource(){this.dispatchMessage=function(e,s){}}function MessageRouterBase(){this._messageQueue=[]}var core=require("kango/core"),utils=require("kango/utils"),timer=require("kango/timer"),backgroundScriptEngine=require("kango/backgroundscript_engine"),array=utils.array,func=utils.func;MessageRouterBase.prototype={_dispatchMessagesFromQueue:function(){this._messageQueue.length>0&&(backgroundScriptEngine.isLoaded()?(array.forEach(this._messageQueue,function(e){core.fireEvent(e.name,e.event)}),this._messageQueue=[]):timer.setTimeout(func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},fireMessageEvent:function(e,s){backgroundScriptEngine.isLoaded()?(this._dispatchMessagesFromQueue(),core.fireEvent("message",s)):(this._messageQueue.push({name:e,event:s}),timer.setTimeout(func.bind(function(){this._dispatchMessagesFromQueue()},this),100))},dispatchMessage:function(e,s){var i={name:e,data:s,origin:"background",target:this,source:this};return this.dispatchMessageEx(i)},dispatchMessageEx:function(e){return timer.setTimeout(func.bind(function(){this.fireMessageEvent("message",e)},this),1),!0}};
 
 
 
@@ -9,6 +8,5 @@ kango.registerModule(function(a){var b=new kango.MessageRouter;a.dispatchMessage
 
 
 
-
-kango.MessageRouter=function(){this.superclass.apply(this,arguments);safari.application.addEventListener("message",kango.func.bind(this._onMessage,this),!1)};
-kango.MessageRouter.prototype=kango.oop.extend(kango.MessageRouterBase,{_onMessage:function(a){if(a.target instanceof SafariBrowserTab){var b={name:a.name,data:a.message,origin:"tab",target:kango.browser.getKangoTab(a.target),source:{dispatchMessage:function(b,c){a.target.page.dispatchMessage(b,c);return!0}}};this.fireMessageEvent(kango.event.MESSAGE,b)}else kango.console.log("Messaging supported only for SafariBrowserTab targets")}});
+function MessageRouter(){MessageRouterBase.call(this),safari.application.addEventListener("message",func.bind(this._onMessage,this),!1)}var core=require("kango/core"),utils=require("kango/utils"),func=utils.func,object=utils.object,browser=require("kango/browser");MessageRouter.prototype=object.extend(MessageRouterBase,{_onMessage:function(e){if(e.target instanceof SafariBrowserTab){var s={name:e.name,data:e.message,origin:"tab",target:browser.getKangoTab(e.target),source:{dispatchMessage:function(s,a){return e.target.page.dispatchMessage(s,a),!0}}};this.fireMessageEvent("message",s)}}}),module.exports=new MessageRouter;
+});

@@ -55,11 +55,7 @@
 		<dict>
 			<key>Start</key>
 			<array>
-				<string>includes/content_kango.js</string>
-				<string>kango/invoke_async.js</string>
-				<string>kango/message_target.js</string>
-				<string>kango/userscript_client.js</string>
-				<string>includes/content_init.js</string>
+				<string>includes/content.js</string>
 			</array>
 		</dict>
 		<key>Whitelist</key>
